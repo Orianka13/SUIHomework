@@ -7,54 +7,56 @@
 
 import SwiftUI
 
+enum CurrentLight {
+    case red, yellow, green
+}
+
 struct ContentView: View {
 
-    @State private var tapCount = 0
     @State private var buttonLabel = "START"
-    @State private var redCircle = ColorCircleView(color: .red, opacity: 0.5)
-    @State private var yellowCircle = ColorCircleView(color: .yellow, opacity: 0.5)
-    @State private var greenCircle = ColorCircleView(color: .green, opacity: 0.5)
+
+    @State private var redLightState = 0.3
+    @State private var yellowLightState = 0.3
+    @State private var greenLightState = 0.3
+
+    @State private var currentLight = CurrentLight.red
 
     var body: some View {
         Color.black
             .edgesIgnoringSafeArea(.all)
-            .overlay(VStack {
-                redCircle
-                    .padding(.top, 20)
-                yellowCircle
-                greenCircle
+            .overlay(VStack(spacing: 20) {
+                ColorCircleView(color: .red, opacity: redLightState)
+                ColorCircleView(color: .yellow, opacity: yellowLightState)
+                ColorCircleView(color: .green, opacity: greenLightState)
                 Spacer()
 
-                Button(action: changeLight) {
-                    Text(buttonLabel)
-                        .padding()
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .background(Color(red: 0, green: 0, blue: 0.5))
-                        .clipShape(Capsule())
-                        .overlay(Capsule().stroke(Color.white, lineWidth: 4))
+                NextButtonView(title: buttonLabel) {
+                    if buttonLabel == "START" {
+                        buttonLabel = "NEXT"
+                    }
+                    changeLight()
                 }
-            })
+            }
+                .padding())
     }
 
     private func changeLight() {
-        if buttonLabel == "START" {
-            buttonLabel = "NEXT"
-        }
+        let lightIsOn = 1.0
+        let lightIsOff = 0.3
 
-        switch tapCount {
-        case 0:
-            greenCircle.opacity = 0.3
-            redCircle.opacity = 1
-            tapCount += 1
-        case 1:
-            redCircle.opacity = 0.3
-            yellowCircle.opacity = 1
-            tapCount += 1
-        default:
-            yellowCircle.opacity = 0.3
-            greenCircle.opacity = 1
-            tapCount = 0
+        switch currentLight {
+        case .red:
+            currentLight = .yellow
+            greenLightState = lightIsOff
+            redLightState = lightIsOn
+        case .yellow:
+            currentLight = .green
+            redLightState = lightIsOff
+            yellowLightState = lightIsOn
+        case .green:
+            currentLight = .red
+            greenLightState = lightIsOn
+            yellowLightState = lightIsOff
         }
     }
 }

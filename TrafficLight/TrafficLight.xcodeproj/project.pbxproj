@@ -12,6 +12,7 @@
 		594FB88B2A0CE81800ADBB90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 594FB88A2A0CE81800ADBB90 /* Assets.xcassets */; };
 		594FB88E2A0CE81800ADBB90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 594FB88D2A0CE81800ADBB90 /* Preview Assets.xcassets */; };
 		594FB8952A0CEA0D00ADBB90 /* ColorCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FB8942A0CEA0D00ADBB90 /* ColorCircleView.swift */; };
+		594FB8972A0E194F00ADBB90 /* NextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FB8962A0E194F00ADBB90 /* NextButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		594FB88A2A0CE81800ADBB90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		594FB88D2A0CE81800ADBB90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		594FB8942A0CEA0D00ADBB90 /* ColorCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCircleView.swift; sourceTree = "<group>"; };
+		594FB8962A0E194F00ADBB90 /* NextButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				594FB8862A0CE81500ADBB90 /* TrafficLightApp.swift */,
 				594FB8882A0CE81500ADBB90 /* ContentView.swift */,
 				594FB8942A0CEA0D00ADBB90 /* ColorCircleView.swift */,
+				594FB8962A0E194F00ADBB90 /* NextButtonView.swift */,
 				594FB88A2A0CE81800ADBB90 /* Assets.xcassets */,
 				594FB88C2A0CE81800ADBB90 /* Preview Content */,
 			);
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				594FB8952A0CEA0D00ADBB90 /* ColorCircleView.swift in Sources */,
+				594FB8972A0E194F00ADBB90 /* NextButtonView.swift in Sources */,
 				594FB8892A0CE81500ADBB90 /* ContentView.swift in Sources */,
 				594FB8872A0CE81500ADBB90 /* TrafficLightApp.swift in Sources */,
 			);
