@@ -7,29 +7,36 @@
 
 import SwiftUI
 
+enum ColorTextField {
+    case red, green, blue
+}
+
 struct ContentView: View {
     @State private var viewColor: Color = .red
+
     @State private var redSliderValue = 255.0
     @State private var greenSliderValue = 255.0
     @State private var blueSliderValue = 255.0
+
+    //@State private var alertPresented = false
+
+    @FocusState private var focusedField: ColorTextField?
 
     var body: some View {
         Color.gray
             .edgesIgnoringSafeArea(.all)
             .overlay(
                 VStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(Color(cgColor: CGColor(red: redSliderValue / 255, green: greenSliderValue / 255, blue: blueSliderValue / 255, alpha: 1)))
-                        .frame(height: 200)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(lineWidth: 4)
-                                .foregroundColor(.white)
-                        )
-                        .padding(.bottom)
+                    RoundedRectangleView(redSliderValue: redSliderValue,
+                                         greenSliderValue: greenSliderValue,
+                                         blueSliderValue: blueSliderValue)
+
                     ColorSliderView(value: $redSliderValue, textColor: .red)
+                        .focused($focusedField, equals: .red)
                     ColorSliderView(value: $greenSliderValue, textColor: .green)
+                        .focused($focusedField, equals: .green)
                     ColorSliderView(value: $blueSliderValue, textColor: .blue)
+                        .focused($focusedField, equals: .blue)
                     Spacer()
                 }
                     .padding())
@@ -37,39 +44,73 @@ struct ContentView: View {
                 ToolbarItemGroup(placement: .keyboard) {
                     HStack(alignment: .center) {
                         Button {
+                            goUp()
                         } label: {
                             Image(systemName: "chevron.up")
                         } .frame(width: 30)
 
                         Button {
+                            goDown()
                         } label: {
                             Image(systemName: "chevron.down")
                         } .frame(width: 30)
+
                         Spacer()
 
-                        Button("Done", action: checkNumber)
-                            .frame(width: 60)
-                        //                        .alert("Wrong Format", isPresented: $alertPresented, actions: {}) {
-                        //                            Text("Enter your name")
-
+                        Button("Done") {
+                            focusedField = nil
+                            //checkNumber(field: focusedField ?? .red)
+                        }
+                        .frame(width: 60)
+//                        .alert("Wrong Format", isPresented: $alertPresented, actions: {}) {
+//                            Text("Enter number 1...255")
+//                        }
                     }
-
                 }
             }
     }
-    private func checkNumber() {
-//        if let _ = Double(userName) {
-//            alertPresented.toggle()
-//            userName = ""
-//            return
-//        }
-//        displayedName = userName
-//        userName = ""
+    private func goUp() {
+        switch focusedField {
+        case .red:
+            focusedField = .blue
+        case .green:
+            focusedField = .red
+        case .blue:
+            focusedField = .green
+        case .none:
+            focusedField = nil
+        }
     }
+    private func goDown() {
+        switch focusedField {
+        case .red:
+            focusedField = .green
+        case .green:
+            focusedField = .blue
+        case .blue:
+            focusedField = .red
+        case .none:
+            focusedField = nil
+        }
+    }
+//    private func checkNumber(field: ColorTextField) {
+////        switch focusedField {
+////        case .red:
+////
+////        case .green:
+////            focusedField = .blue
+////        default:
+////            focusedField = .red
+////        }
+////        if let _ = String(field) {
+////            alertPresented.toggle()
+////            userName = ""
+////            return
+////        }
+////        displayedName = userName
+////        userName = ""
+//    }
 }
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -77,24 +118,4 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct ColorSliderView: View {
-    @Binding var value: Double
-    let textColor: Color
 
-    var body: some View {
-        HStack(alignment: .center) {
-            Text("\(lround(value))").foregroundColor(textColor)
-                .frame(width: 40, alignment: .leading)
-            Slider(value: $value, in: 0...255, step: 1)
-                .accentColor(textColor)
-            TextField("\(value)", value: $value, formatter: NumberFormatter())
-                .foregroundColor(textColor)
-                .frame(width: 40, alignment: .trailing)
-                .multilineTextAlignment(.center)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(lineWidth: 1)
-                        .foregroundColor(.white))
-        }
-    }
-}
