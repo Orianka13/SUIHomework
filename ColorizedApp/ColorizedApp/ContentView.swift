@@ -18,8 +18,6 @@ struct ContentView: View {
     @State private var greenSliderValue = 255.0
     @State private var blueSliderValue = 255.0
 
-    //@State private var alertPresented = false
-
     @FocusState private var focusedField: ColorTextField?
 
     var body: some View {
@@ -59,12 +57,8 @@ struct ContentView: View {
 
                         Button("Done") {
                             focusedField = nil
-                            //checkNumber(field: focusedField ?? .red)
                         }
                         .frame(width: 60)
-//                        .alert("Wrong Format", isPresented: $alertPresented, actions: {}) {
-//                            Text("Enter number 1...255")
-//                        }
                     }
                 }
             }
@@ -93,23 +87,6 @@ struct ContentView: View {
             focusedField = nil
         }
     }
-//    private func checkNumber(field: ColorTextField) {
-////        switch focusedField {
-////        case .red:
-////
-////        case .green:
-////            focusedField = .blue
-////        default:
-////            focusedField = .red
-////        }
-////        if let _ = String(field) {
-////            alertPresented.toggle()
-////            userName = ""
-////            return
-////        }
-////        displayedName = userName
-////        userName = ""
-//    }
 }
 
 struct ContentView_Previews: PreviewProvider {
