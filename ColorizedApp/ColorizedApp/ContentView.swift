@@ -33,8 +33,43 @@ struct ContentView: View {
                     Spacer()
                 }
                     .padding())
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HStack(alignment: .center) {
+                        Button {
+                        } label: {
+                            Image(systemName: "chevron.up")
+                        } .frame(width: 30)
+
+                        Button {
+                        } label: {
+                            Image(systemName: "chevron.down")
+                        } .frame(width: 30)
+                        Spacer()
+
+                        Button("Done", action: checkNumber)
+                            .frame(width: 60)
+                        //                        .alert("Wrong Format", isPresented: $alertPresented, actions: {}) {
+                        //                            Text("Enter your name")
+
+                    }
+
+                }
+            }
+    }
+    private func checkNumber() {
+//        if let _ = Double(userName) {
+//            alertPresented.toggle()
+//            userName = ""
+//            return
+//        }
+//        displayedName = userName
+//        userName = ""
     }
 }
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
