@@ -9,31 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var viewColor: Color = .red
-    @State private var redSliderValue = Double.random(in: 0...255)
-    @State private var greenSliderValue = Double.random(in: 0...255)
-    @State private var blueSliderValue = Double.random(in: 0...255)
+    @State private var redSliderValue = 255.0
+    @State private var greenSliderValue = 255.0
+    @State private var blueSliderValue = 255.0
 
     var body: some View {
         Color.gray
-                    .edgesIgnoringSafeArea(.all)
-                    .overlay(
-        VStack {
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(viewColor)
-                .frame(height: 200)
-                .overlay(
+            .edgesIgnoringSafeArea(.all)
+            .overlay(
+                VStack {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(lineWidth: 4)
-                        .foregroundColor(.white)
-                )
-            ColorSliderView(value: $redSliderValue, textColor: .red)
-            ColorSliderView(value: $greenSliderValue, textColor: .green)
-            ColorSliderView(value: $blueSliderValue, textColor: .blue)
-            Spacer()
-        }
-        .padding())
+                        .foregroundColor(Color(cgColor: CGColor(red: redSliderValue / 255, green: greenSliderValue / 255, blue: blueSliderValue / 255, alpha: 1)))
+                        .frame(height: 200)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(lineWidth: 4)
+                                .foregroundColor(.white)
+                        )
+                        .padding(.bottom)
+                    ColorSliderView(value: $redSliderValue, textColor: .red)
+                    ColorSliderView(value: $greenSliderValue, textColor: .green)
+                    ColorSliderView(value: $blueSliderValue, textColor: .blue)
+                    Spacer()
+                }
+                    .padding())
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {
